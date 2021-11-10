@@ -1,162 +1,54 @@
-import React ,{useState}from 'react';
-import AddUser from './Components/Users/AddUser';
-import UsersList from './Components/Users/UsersList';
+import React,{useState} from 'react';
 import { Nav, Table, Row, Col, Navbar, NavDropdown } from 'react-bootstrap';
 import Container from "react-bootstrap/Container";
-import Card from "@material-ui/core/Card";
 import { makeStyles } from "@material-ui/core/styles";
-import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
+import NavBar from '../src/Components/Navbar/NavBar'
+import SideBar from '../src/Components/SideBar/SideBar'
+import BasicData from '../src/Components/StudentBasicData/BasicData'
+import ListaCursos from '../src/Components/CoursesList/ListaCursos'
+import styles from './root.module.css'
 const useStyles = makeStyles({
-  root: {
-    maxWidth: 1200
+  // root: {
+  //   maxWidth: 1200
+  // },
+  // something:{
+  //   maxWidth: 200,
+  // }
+  col:{
+    padding:0,
+    marginRight:0
   },
-  something:{
-    maxWidth: 200,
+  container: {
+    
+    
   }
 });
 
 function App() {
+  
   const classes = useStyles();
+  // const [side,setSide]=useState('');
+  const [state, setState] = useState(false);
+  const toggleDrawer = (open) => (event) => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+    setState(open)
+  };
+
+  const justdoit = (open)=>{
+      setState(open);
+  }
   return (
     <div>
-      <Navbar bg="dark" variant="dark">
-          <Navbar.Brand href="#home">Nombre Marca</Navbar.Brand>
-          <Nav className="mr-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#link">Link</Nav.Link>
-            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Another action
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Separated link
-              </NavDropdown.Item>
-            </NavDropdown>
-          </Nav>
-          <Nav>
-            <Nav.Link href="#deets">login</Nav.Link>
-            <Nav.Link eventKey={2} href="#memes">
-              Dank memes
-            </Nav.Link>
-          </Nav>
-        </Navbar>   
-      <Row>
-      <Card className={classes.something}>
-              <CardContent>
-        <Col xs={1}>
-            <div>
-            <nav class="main-nav">
-              <ul class="main-nav-ul">
-                <li>
-                  <a href="#">Home</a>
-                </li>
-
-                <li>
-                  <a href="#">
-                    Products
-                    <span class="sub-arrow" />
-                  </a>
-                  <ul>
-                    <li>
-                      <a href="#">Item 1</a>
-                    </li>
-                    <li>
-                      <a href="#">Item 2</a>
-                    </li>
-                    <li>
-                      <a href="#">Item 3</a>
-                    </li>
-                    <li>
-                      <a href="#">Item 4</a>
-                    </li>
-                  </ul>
-                </li>
-
-                <li>
-                  <a href="#">Services</a>
-                </li>
-                <li>
-                  <a href="#">About</a>
-                </li>
-                <li>
-                  <a href="#">Contact</a>
-                </li>
-                <li>
-                  <a href="#">dropdown</a>
-                  <ul>
-                    <li>
-                      <a href="#">Item 1</a>
-                    </li>
-                    <li>
-                      <a href="#">Item 2</a>
-                    </li>
-                    <li>
-                      <a href="#">Item 3</a>
-                    </li>
-                    <li>
-                      <a href="#">Item 4</a>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-              <ul />
-            </nav>
-          </div>
-        </Col>
-        </CardContent>
-          </Card>
-        <Col>
-
-          <Container className="contain">
-          <Card className={classes.root}>
-              <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
-              Datos Basicos del alumno
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              Ejemplo Ejemplo Ejemplo EjemploEjemplo EjemploEjemplo EjemploEjemplo EjemploEjemplo EjemploEjemplo EjemploEjemplo EjemploEjemplo EjemploEjemplo EjemploEjemplo Ejemplo
-            </Typography>
-          </CardContent>
-          </Card>
-          <Card className={classes.root}>
-              <CardContent>
-            <Table responsive>
-                <thead>
-                    <tr>
-                    <th>#</th>
-                    {Array.from({ length: 12 }).map((_, index) => (
-                        <th key={index}>Table heading</th>
-                    ))}
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                    <td>1</td>
-                    {Array.from({ length: 12 }).map((_, index) => (
-                        <td key={index}>Table cell {index}</td>
-                    ))}
-                    </tr>
-                    <tr>
-                    <td>2</td>
-                    {Array.from({ length: 12 }).map((_, index) => (
-                        <td key={index}>Table cell {index}</td>
-                    ))}
-                    </tr>
-                    <tr>
-                    <td>3</td>
-                    {Array.from({ length: 12 }).map((_, index) => (
-                        <td key={index}>Table cell {index}</td>
-                    ))}
-                    </tr>
-                </tbody>
-                </Table>
-                </CardContent>
-          </Card>
-            </Container>
+      <NavBar justdoit={justdoit}/>
+      <Row className={styles.row}>
+        <SideBar toggleDrawer={toggleDrawer} hey={state}/>
+        <Col className={classes.col}>
+          <Container className={classes.container}>
+            <BasicData/>    
+            <ListaCursos/>
+          </Container>
         </Col>
     </Row>
         
