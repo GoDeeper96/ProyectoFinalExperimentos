@@ -8,12 +8,7 @@ import BasicData from '../src/Components/StudentBasicData/BasicData'
 import ListaCursos from '../src/Components/CoursesList/ListaCursos'
 import styles from './root.module.css'
 const useStyles = makeStyles({
-  // root: {
-  //   maxWidth: 1200
-  // },
-  // something:{
-  //   maxWidth: 200,
-  // }
+
   col:{
     padding:0,
     marginRight:0
